@@ -5,9 +5,11 @@ from pathlib import Path
 from urllib.parse import urlsplit, parse_qs, unquote, quote
 import argparse, json, time, re
 
-ROOT = Path(__file__).resolve().parent
-MANIFEST = {f['name']: f for f in json.loads((ROOT/'manifest.json').read_text())}
-STATIC = {'/mark.svg':('mark.svg','image/svg+xml'), '/':('index.html','text/html; charset=utf-8'), '/index.html':('index.html','text/html; charset=utf-8'), '/style.css':('style.css','text/css; charset=utf-8'), '/site.js':('site.js','text/javascript; charset=utf-8'), '/manifest.json':('manifest.json','application/json; charset=utf-8'), '/README.md':('README.md','text/plain; charset=utf-8')}
+ROOT = Path(__file__).resolve().parent.parent
+WEB = ROOT / 'web'
+DOCS = ROOT / 'docs'
+MANIFEST = {f['name']: f for f in json.loads((WEB/'manifest.json').read_text())}
+STATIC = {'/mark.svg':('mark.svg','image/svg+xml'), '/':('index.html','text/html; charset=utf-8'), '/index.html':('index.html','text/html; charset=utf-8'), '/style.css':('style.css','text/css; charset=utf-8'), '/site.js':('site.js','text/javascript; charset=utf-8'), '/manifest.json':('manifest.json','application/json; charset=utf-8'), '/README.md':('README.md','text/plain; charset=utf-8'), '/MANUAL.md':('MANUAL.md','text/plain; charset=utf-8')}
 
 class Handler(BaseHTTPRequestHandler):
     server_version = 'CosmicWebTest/1.0'
@@ -24,7 +26,9 @@ class Handler(BaseHTTPRequestHandler):
         target=urlsplit(self.path); path=unquote(target.path)
         mode='files'; name=''; download_name=''
         if path in STATIC:
-            filename,mime=STATIC[path];data=(ROOT/filename).read_bytes()
+            filename,mime=STATIC[path]
+            source = ROOT / filename if filename == 'README.md' else DOCS / filename if filename == 'MANUAL.md' else WEB / filename
+            data=source.read_bytes()
             if filename == 'index.html':
                 data = data.replace(b'<html lang="zh-CN"', b'<html lang="zh-CN" data-server-fixtures', 1)
         else:
@@ -40,7 +44,7 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_error(404,'No such test fixture');return
             if mode=='redirect':
                 self.send_response(302);self.send_header('Location','/attachment/'+quote(name));self.send_header('Content-Length','0');self.end_headers();return
-            meta=MANIFEST[name];mime=meta['mime'];data=(ROOT/'files'/name).read_bytes()
+            meta=MANIFEST[name];mime=meta['mime'];data=(WEB/'files'/name).read_bytes()
         start,end,status=0,len(data)-1,200
         requested=self.headers.get('Range')
         if requested and mode!='unknown-size':
@@ -74,7 +78,7 @@ class Handler(BaseHTTPRequestHandler):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--port',type=int,default=8765);args=parser.parse_args()
     try: server=ThreadingHTTPServer(('127.0.0.1',args.port),Handler)
-    except OSError as error:raise SystemExit(f'Cannot start server: {error}\nTry: python3 server.py --port 8766')
+    except OSError as error:raise SystemExit(f'Cannot start server: {error}\nTry: python3 tools/server.py --port 8766')
     print(f'Cosmic WebTest: http://127.0.0.1:{args.port}/\nPress Control+C to stop. Serving only this test website.',flush=True)
     try:server.serve_forever()
     except KeyboardInterrupt:pass
