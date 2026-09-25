@@ -1,0 +1,5 @@
+.DS_Store
+.build/
+.pages/
+__pycache__/
+*.pyc

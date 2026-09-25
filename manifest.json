@@ -1,0 +1,66 @@
+[
+  {
+    "name": "sample.docx",
+    "format": "docx",
+    "title": "Word 文档",
+    "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "bytes": 38048,
+    "family": "word"
+  },
+  {
+    "name": "sample.doc",
+    "format": "doc",
+    "title": "Word 旧版文档",
+    "mime": "application/msword",
+    "bytes": 24576,
+    "family": "word"
+  },
+  {
+    "name": "sample.xlsx",
+    "format": "xlsx",
+    "title": "Excel 工作簿",
+    "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "bytes": 5569,
+    "family": "sheet"
+  },
+  {
+    "name": "sample.xls",
+    "format": "xls",
+    "title": "Excel 旧版工作簿",
+    "mime": "application/vnd.ms-excel",
+    "bytes": 10240,
+    "family": "sheet"
+  },
+  {
+    "name": "sample.pptx",
+    "format": "pptx",
+    "title": "PowerPoint 幻灯片",
+    "mime": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    "bytes": 14461,
+    "family": "slides"
+  },
+  {
+    "name": "sample.ppt",
+    "format": "ppt",
+    "title": "PowerPoint 旧版幻灯片",
+    "mime": "application/vnd.ms-powerpoint",
+    "bytes": 466944,
+    "family": "slides"
+  },
+  {
+    "name": "sample.pdf",
+    "format": "pdf",
+    "title": "PDF 文档",
+    "mime": "application/pdf",
+    "bytes": 5230,
+    "family": "pdf"
+  },
+  {
+    "name": "sample.eml",
+    "format": "eml",
+    "title": "邮件",
+    "mime": "message/rfc822",
+    "bytes": 1878,
+    "family": "eml"
+  }
+]

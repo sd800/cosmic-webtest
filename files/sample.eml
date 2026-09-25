@@ -1,0 +1,40 @@
+Subject: Document Preview =?utf-8?b?6YKu5Lu25rWL6K+V?=
+From: Cosmic Test <preview-test@example.com>
+To: Reader <reader@example.com>
+Date: Fri, 25 Sep 2026 12:00:00 +0000
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============5289960758406065104=="
+
+--===============5289960758406065104==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Synthetic email fixture. Open the HTML part for clickable test links.
+https://example.com/?source=3Dcosmic-preview
+http://example.com/
+mailto:preview-test@example.com?subject=3DCosmic%20Gemini%20test&body=3DHello=
+%20from%20the%20test%20document.
+tel:+12125550123
+sms:+12125550123?body=3DPreview%20test
+cosmic-test://open/demo?source=3Ddocument
+
+--===============5289960758406065104==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+
+PCFkb2N0eXBlIGh0bWw+PGh0bWwgbGFuZz0iemgtQ04iPjxib2R5PjxoMT7pgq7ku7bpooTop4jm
+tYvor5U8L2gxPjxwPuWPquWMheWQq+acrOWcsOaWh+acrOS4juaYvuW8j+eCueWHu+eahOWklumD
+qOmTvuaOpe+8jOS4jeWMheWQq+i/nOeoi+WbvueJh+aIlumZhOS7tuOAgjwvcD48dWw+PGxpPjxh
+IGhyZWY9Imh0dHBzOi8vZXhhbXBsZS5jb20vP3NvdXJjZT1jb3NtaWMtcHJldmlldyI+SFRUUFMg
+d2Vic2l0ZTwvYT48L2xpPjxsaT48YSBocmVmPSJodHRwOi8vZXhhbXBsZS5jb20vIj5IVFRQIHdl
+YnNpdGU8L2E+PC9saT48bGk+PGEgaHJlZj0ibWFpbHRvOnByZXZpZXctdGVzdEBleGFtcGxlLmNv
+bT9zdWJqZWN0PUNvc21pYyUyMEdlbWluaSUyMHRlc3QmYW1wO2JvZHk9SGVsbG8lMjBmcm9tJTIw
+dGhlJTIwdGVzdCUyMGRvY3VtZW50LiI+RW1haWwgLyBtYWlsdG88L2E+PC9saT48bGk+PGEgaHJl
+Zj0idGVsOisxMjEyNTU1MDEyMyI+UGhvbmUgLyB0ZWw8L2E+PC9saT48bGk+PGEgaHJlZj0ic21z
+OisxMjEyNTU1MDEyMz9ib2R5PVByZXZpZXclMjB0ZXN0Ij5UZXh0IG1lc3NhZ2UgLyBzbXM8L2E+
+PC9saT48bGk+PGEgaHJlZj0iY29zbWljLXRlc3Q6Ly9vcGVuL2RlbW8/c291cmNlPWRvY3VtZW50
+Ij5DdXN0b20gYXBwIHByb3RvY29sPC9hPjwvbGk+PC91bD48L2JvZHk+PC9odG1sPg0K
+
+--===============5289960758406065104==--
