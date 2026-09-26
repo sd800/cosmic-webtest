@@ -16,4 +16,4 @@ The site follows the browser's light or dark appearance. Its sample files are in
 
 GitHub Pages hosts the website as static files. The optional local server in [MANUAL.md](docs/MANUAL.md) adds tests that require real HTTP response headers, redirects, or delayed responses.
 
-Current version: [26.9.25.1](CHANGELOG.md). Versions use `YY.M.D.NUM`, with the last number counting releases on that date.
+Current version: [26.9.25.2](CHANGELOG.md). Versions use `YY.M.D.NUM`, with the last number counting releases on that date.

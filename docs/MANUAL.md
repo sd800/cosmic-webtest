@@ -48,6 +48,8 @@ GitHub Pages 是静态托管，不能运行本项目的 Python 服务。真正�
 | `web/files/sample.xls` | 真正的 Excel 97 工作簿 |
 | `web/files/sample.pptx` | 两张幻灯片和 6 个链接 |
 | `web/files/sample.ppt` | 真正的 PowerPoint 97 演示文稿 |
+| `web/files/dark-paper.pptx` | 三页对照：纯黑底、主题引用的深色底、白底含深色文本框 |
+| `web/files/dark-paper.ppt` | 同一黑底对照样本的真正 PowerPoint 97 版本 |
 | `web/files/sample.pdf` | 白纸与深色纸张、文字层和 URI 链接 |
 | `web/files/sample.eml` | 合成邮件，纯文本/HTML 和 6 个链接 |
 

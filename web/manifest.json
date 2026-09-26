@@ -48,6 +48,22 @@
     "family": "slides"
   },
   {
+    "name": "dark-paper.pptx",
+    "format": "pptx",
+    "title": "黑底幻灯片测试",
+    "mime": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    "bytes": 16304,
+    "family": "slides"
+  },
+  {
+    "name": "dark-paper.ppt",
+    "format": "ppt",
+    "title": "黑底幻灯片测试（旧版）",
+    "mime": "application/vnd.ms-powerpoint",
+    "bytes": 465920,
+    "family": "slides"
+  },
+  {
     "name": "sample.pdf",
     "format": "pdf",
     "title": "PDF 文档",
