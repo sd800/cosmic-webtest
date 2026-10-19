@@ -31,17 +31,19 @@
     code.textContent = uri || '—';
   }
 
+  function updatePhone(name, kind, errorId, body = '') {
+    const raw = field(name).value.trim();
+    const number = raw.replace(/[\s().-]/g, '');
+    const valid = /^\+?\d{3,15}$/.test(number);
+    const invalid = Boolean(raw) && !valid;
+    field(name).setAttribute('aria-invalid', String(invalid));
+    document.getElementById(errorId).hidden = !invalid;
+    setLink(kind, valid ? `${kind}:${number}${body ? `?body=${encode(body)}` : ''}` : '', raw || '等待输入电话号码');
+  }
+
   function update() {
-    const rawPhone = field('phone').value.trim();
-    const phone = rawPhone.replace(/[\s().-]/g, '');
-    const phoneValid = /^\+?\d{3,15}$/.test(phone);
-    const phoneInvalid = Boolean(rawPhone) && !phoneValid;
-    field('phone').setAttribute('aria-invalid', String(phoneInvalid));
-    document.querySelector('#builder-phone-error').hidden = !phoneInvalid;
-    const phoneLabel = rawPhone || '等待输入电话号码';
-    setLink('tel', phoneValid ? `tel:${phone}` : '', phoneLabel);
-    const smsBody = field('smsBody').value;
-    setLink('sms', phoneValid ? `sms:${phone}${smsBody ? `?body=${encode(smsBody)}` : ''}` : '', phoneLabel);
+    updatePhone('phone', 'tel', 'builder-phone-error');
+    updatePhone('smsPhone', 'sms', 'builder-sms-phone-error', field('smsBody').value);
 
     const to = addresses(field('email').value);
     const cc = addresses(field('cc').value);

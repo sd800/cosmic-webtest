@@ -2,6 +2,11 @@
 
 Versions follow `YY.M.D.NUM`. `NUM` starts at 1 for each date and increases with each release on that date.
 
+## 2026-10-19 — 26.10.19.2
+
+- Group each telephone, email, and SMS input with its corresponding generated link in one card.
+- Give SMS its own recipient field, keeping edits within the matching group.
+
 ## 2026-10-19 — 26.10.19.1
 
 - Added a two-column link builder for telephone, email, and SMS tests, including optional message fields and a reset button.

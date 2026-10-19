@@ -133,15 +133,18 @@ h2 { font-size: 15px; font-weight: 650; margin: 0; }
   .request-row .link-arrow { grid-column: 3; grid-row: 1/3; }
 }
 
-.builder-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.builder-groups { display: grid; gap: 22px; margin: 0; }
+.builder-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 .builder-card { min-width: 0; margin: 0; background: var(--surface); border: 1px solid var(--line); border-top: 2px solid var(--accent); border-radius: 4px 4px 8px 8px; }
-.builder-card-heading { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 16px 21px; min-height: 59px; border-bottom: 1px solid var(--line); }
-.builder-reset { border: 0; background: transparent; padding: 2px 0; font-size: 13px; color: var(--blue); }
+.builder-card-heading { padding: 13px 21px; border-bottom: 1px solid var(--line); }
+.builder-card-heading h2 { display: flex; align-items: baseline; gap: 10px; margin: 0; font-size: 15px; font-weight: 650; }
+.builder-card-heading h2 span { color: var(--muted); font-size: 13px; font-weight: 400; }
+.builder-reset { border: 0; background: transparent; padding: 6px 0; font-size: 13px; color: var(--blue); align-self: center; }
 .builder-reset:hover { text-decoration: underline; text-underline-offset: 4px; }
-.builder-fields { display: grid; padding: 20px 21px; gap: 8px; }
+.builder-fields { display: grid; align-content: start; padding: 20px 21px; gap: 8px; }
 .builder-fields label { font-size: 14px; font-weight: 550; }
 .builder-fields label:not(:first-child) { margin-top: 9px; }
-.builder-optional, .builder-live { font-size: 12px; font-weight: 400; color: var(--muted); }
+.builder-optional { font-size: 12px; font-weight: 400; color: var(--muted); }
 .builder-optional { margin-left: 9px; }
 .builder-fields input, .builder-fields textarea { display: block; width: 100%; min-width: 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--text); font: inherit; font-size: 14px; line-height: 1.5; letter-spacing: inherit; }
 .builder-fields textarea { resize: vertical; min-height: 80px; max-height: 360px; }
@@ -152,16 +155,14 @@ h2 { font-size: 15px; font-weight: 650; margin: 0; }
 .builder-more { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 16px; }
 .builder-more summary { cursor: pointer; width: fit-content; color: var(--blue); font-size: 14px; }
 .builder-more > div { display: grid; gap: 8px; margin-top: 15px; }
-.builder-result { padding: 19px 21px; }
-.builder-result + .builder-result { border-top: 1px solid var(--line); }
-.builder-result h3 { display: flex; align-items: baseline; gap: 9px; font-size: 14px; font-weight: 550; margin: 0 0 10px; }
-.builder-result h3 span { font-size: 12px; color: var(--muted); font-weight: 400; }
+.builder-result { min-width: 0; padding: 20px 21px; border-left: 1px solid var(--line); }
+.builder-result h3 { display: flex; align-items: baseline; gap: 9px; font-size: 14px; font-weight: 550; margin: 0 0 8px; }
 .builder-link { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 6px; background: var(--soft); color: var(--blue); font-size: 15px; overflow-wrap: anywhere; }
 .builder-link[href]:hover { background: var(--hover); text-decoration: underline; text-underline-offset: 4px; }
 .builder-link span { flex-shrink: 0; }
 .builder-link[aria-disabled="true"] { color: var(--muted); }
 .builder-result code { display: block; color: var(--muted); font: 13px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; margin-top: 9px; max-height: 150px; overflow: auto; user-select: text; }
-@media (max-width: 1000px) { .builder-grid { gap: 18px; } .builder-fields, .builder-result { padding-inline: 16px; } .builder-card-heading { padding-inline: 16px; } }
+@media (max-width: 1000px) { .builder-fields, .builder-result, .builder-card-heading { padding-inline: 16px; } }
 @media (max-width: 800px) { .navigation { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media (max-width: 650px) { .builder-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 650px) { .builder-pair { grid-template-columns: minmax(0, 1fr); } .builder-result { border-left: 0; border-top: 1px solid var(--line); } }
 @media (max-width: 560px) { .navigation { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
