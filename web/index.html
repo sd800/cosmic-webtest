@@ -5,11 +5,11 @@
   <script>
     // Choose the panel before the first paint; no loading layout or anchor jump.
     const initialView = location.hash.slice(1);
-    if (['documents', 'links', 'requests'].includes(initialView)) document.documentElement.dataset.view = initialView;
+    if (['documents', 'links', 'generator', 'requests'].includes(initialView)) document.documentElement.dataset.view = initialView;
   </script>
   <title>Cosmic WebTest</title>
   <link rel="icon" type="image/svg+xml" href="mark.svg">
-  <link rel="stylesheet" href="style.css"><script src="site.js" defer></script>
+  <link rel="stylesheet" href="style.css"><script src="site.js" defer></script><script src="link-builder.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#workspace">跳至测试区域</a>
@@ -18,6 +18,7 @@
     <nav class="navigation" role="tablist" aria-label="测试分类" aria-orientation="vertical">
       <button class="nav-item" id="tab-documents" role="tab" aria-controls="panel-documents" aria-selected="true" data-view="documents"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Zm0 0v6h6M8 13h8M8 17h5"/></svg><span>文档样本</span></button>
       <button class="nav-item" id="tab-links" role="tab" aria-controls="panel-links" aria-selected="false" tabindex="-1" data-view="links"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0M13 7l1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" transform="translate(1 1)"/></svg><span>链接与协议</span></button>
+      <button class="nav-item" id="tab-generator" role="tab" aria-controls="panel-generator" aria-selected="false" tabindex="-1" data-view="generator"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h7v14H3zM14 5h7v14h-7M6 9h1M6 13h1m6-3 3 2-3 2M18 9h1M18 15h1"/></svg><span>链接生成器</span></button>
       <button class="nav-item" id="tab-requests" role="tab" aria-controls="panel-requests" aria-selected="false" tabindex="-1" data-view="requests"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4"/></svg><span>下载路径</span></button>
     </nav>
     <div class="sidebar-bottom"><span class="sidebar-rule"></span><a class="help-link" href="MANUAL.md" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></svg>使用说明<span aria-hidden="true">↗</span></a></div>
@@ -60,8 +61,39 @@
       </div>
       <details class="test-notes"><summary>测试提示</summary><div><p>开启 Mailto Capture 测试邮件、电话和短信。请勿实际发送或拨号。</p><p>本站的网页链接正常跳转；文档预览内的链接用于测试 External Links Capture。虚构协议没有对应应用。</p></div></details>
     </section>
+    <section class="view" id="panel-generator" role="tabpanel" aria-labelledby="tab-generator" tabindex="0">
+      <header class="view-heading"><div><span class="section-index" lang="en">03 / LINK BUILDER</span><h1>链接生成器</h1></div></header>
+      <div class="builder-grid">
+        <form class="builder-card builder-inputs" id="link-builder" autocomplete="off">
+          <header class="builder-card-heading"><h2>输入内容</h2><button type="button" class="builder-reset" id="builder-reset">恢复默认</button></header>
+          <div class="builder-fields">
+            <label for="builder-phone">电话号码</label>
+            <input id="builder-phone" name="phone" type="tel" value="+1 201-555-1234" spellcheck="false" aria-describedby="builder-phone-error" lang="en">
+            <p class="builder-error" id="builder-phone-error" hidden>请输入有效的电话号码。</p>
+            <label for="builder-email">邮箱地址</label>
+            <input id="builder-email" name="email" type="text" inputmode="email" value="contact@example.edu" spellcheck="false" aria-describedby="builder-email-error" lang="en">
+            <p class="builder-error" id="builder-email-error" hidden>请检查邮箱地址、抄送或密送地址。</p>
+            <label for="builder-sms-body">短信正文<span class="builder-optional">选填</span></label>
+            <textarea id="builder-sms-body" name="smsBody" rows="3" placeholder="短信正文"></textarea>
+            <details class="builder-more"><summary>更多邮件字段</summary><div>
+              <label for="builder-cc">抄送</label><input id="builder-cc" name="cc" type="text" inputmode="email" placeholder="copy@example.edu" spellcheck="false" lang="en">
+              <label for="builder-bcc">密送</label><input id="builder-bcc" name="bcc" type="text" inputmode="email" placeholder="private@example.edu" spellcheck="false" lang="en">
+              <label for="builder-subject">主题</label><input id="builder-subject" name="subject" type="text">
+              <label for="builder-mail-body">正文</label><textarea id="builder-mail-body" name="mailBody" rows="4"></textarea>
+            </div></details>
+          </div>
+        </form>
+        <section class="builder-card builder-output" aria-labelledby="builder-output-title">
+          <header class="builder-card-heading"><h2 id="builder-output-title">测试链接</h2><span class="builder-live">随输入更新</span></header>
+          <div class="builder-result"><h3>电话<span lang="en">tel:</span></h3><a id="builder-tel-link" class="builder-link" href="tel:+12015551234" lang="en">+1 201-555-1234<span aria-hidden="true">↗</span></a><code id="builder-tel-uri" lang="en">tel:+12015551234</code></div>
+          <div class="builder-result"><h3>邮件<span lang="en">mailto:</span></h3><a id="builder-mailto-link" class="builder-link" href="mailto:contact@example.edu" lang="en">contact@example.edu<span aria-hidden="true">↗</span></a><code id="builder-mailto-uri" lang="en">mailto:contact@example.edu</code></div>
+          <div class="builder-result"><h3>短信<span lang="en">sms:</span></h3><a id="builder-sms-link" class="builder-link" href="sms:+12015551234" lang="en">+1 201-555-1234<span aria-hidden="true">↗</span></a><code id="builder-sms-uri" lang="en">sms:+12015551234</code></div>
+        </section>
+      </div>
+      <details class="test-notes"><summary>测试提示</summary><div><p>左侧编辑，右侧点击链接测试 Mailto Capture。多个邮箱地址可用逗号或分号分隔。</p><p>输入仅在当前页面使用，不保存或发送。请勿实际发送邮件、短信或拨号。</p></div></details>
+    </section>
     <section class="view" id="panel-requests" role="tabpanel" aria-labelledby="tab-requests" tabindex="0">
-      <header class="view-heading"><div><span class="section-index" lang="en">03 / REQUESTS</span><h1>下载路径</h1></div></header>
+      <header class="view-heading"><div><span class="section-index" lang="en">04 / REQUESTS</span><h1>下载路径</h1></div></header>
       <div class="request-table"><div class="request-labels" aria-hidden="true"><span>测试入口</span><span>链接特征</span><span>文件</span><span></span></div>
         <a class="request-row" href="files/sample.docx" download="下载属性 示例.docx"><strong lang="en">download 属性</strong><span>指定中文文件名</span><span class="format" lang="en">DOCX</span><span class="link-arrow" aria-hidden="true">↗</span></a>
         <a class="request-row" href="files/sample.xlsx?source=cosmic-webtest&amp;case=query"><strong>带查询参数</strong><span>文件路径附带参数</span><span class="format" lang="en">XLSX</span><span class="link-arrow" aria-hidden="true">↗</span></a>

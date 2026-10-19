@@ -2,7 +2,7 @@
 
 项目简介见仓库根目录的 `README.md`。本手册说明测试内容、本地运行和 GitHub Pages 部署。
 
-左侧切换文档样本、链接与协议、下载路径。自动适配深浅色；刷新时保留当前栏目，不异步插入文件列表或加载网页字体。
+左侧切换文档样本、链接与协议、链接生成器、下载路径。自动适配深浅色；刷新时保留当前栏目，不异步插入文件列表或加载网页字体。
 
 ## 发布到 GitHub Pages
 
@@ -29,6 +29,14 @@ workflow 运行 `python3 tools/prepare-pages.py`，只发布 `.pages/` 中的网
 GitHub Pages 是静态托管，不能运行本项目的 Python 服务。真正的自定义 Content-Disposition、无扩展名下载响应、HTTP 302、慢速分块与省略 Content-Length 等用例仅由本地 `tools/server.py` 提供，线上页面不显示这些入口。不使用 JavaScript、假重定向或 Service Worker 冒充真实服务端响应。
 
 官方说明：[GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)、[Actions 部署](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
+
+## 链接生成器
+
+左侧输入电话号码、邮箱和可选的邮件／短信内容，右侧即时生成可点击的 `tel:`／`mailto:`／`sms:` 链接及可选中的原始 URI。默认号码为 `+1 201-555-1234`，邮箱为 `contact@example.edu`；“恢复默认”会清空可选字段并恢复这两个地址。
+
+展开“更多邮件字段”可填写抄送、密送、主题和正文。多个邮箱使用逗号或分号分隔。空格、加号、中文、换行和查询符号会编码到链接中，适合检查 Mailto Capture 是否还原正确。无效或空的目标地址不会生成可点击的链接；清空错误输入会立即隐藏对应提示。
+
+输入只在当前页面使用，不保存或发送。没有启用链接捕获的浏览器可能尝试打开邮件、电话或短信应用，请勿实际发送或拨号。既有文档样本与固定链接不受生成器输入影响。
 
 ## 插件准备
 

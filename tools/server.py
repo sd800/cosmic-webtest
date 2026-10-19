@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parent.parent
 WEB = ROOT / 'web'
 DOCS = ROOT / 'docs'
 MANIFEST = {f['name']: f for f in json.loads((WEB/'manifest.json').read_text())}
-STATIC = {'/mark.svg':('mark.svg','image/svg+xml'), '/':('index.html','text/html; charset=utf-8'), '/index.html':('index.html','text/html; charset=utf-8'), '/style.css':('style.css','text/css; charset=utf-8'), '/site.js':('site.js','text/javascript; charset=utf-8'), '/manifest.json':('manifest.json','application/json; charset=utf-8'), '/README.md':('README.md','text/plain; charset=utf-8'), '/MANUAL.md':('MANUAL.md','text/plain; charset=utf-8')}
+STATIC = {'/link-builder.js':('link-builder.js','text/javascript; charset=utf-8'), '/mark.svg':('mark.svg','image/svg+xml'), '/':('index.html','text/html; charset=utf-8'), '/index.html':('index.html','text/html; charset=utf-8'), '/style.css':('style.css','text/css; charset=utf-8'), '/site.js':('site.js','text/javascript; charset=utf-8'), '/manifest.json':('manifest.json','application/json; charset=utf-8'), '/README.md':('README.md','text/plain; charset=utf-8'), '/MANUAL.md':('MANUAL.md','text/plain; charset=utf-8')}
 
 class Handler(BaseHTTPRequestHandler):
     server_version = 'CosmicWebTest/1.0'

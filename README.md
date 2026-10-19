@@ -10,10 +10,11 @@ Cosmic WebTest is a small website for testing how browser extensions handle docu
 
 - **Documents:** Open or download sample Word documents, spreadsheets, slides, a PDF, and an email file.
 - **Links and protocols:** Try web, email, telephone, SMS, and sample application links. The documents also contain clickable links.
+- **Link builder:** Edit a phone number or email address and try the generated telephone, email, and SMS links.
 - **Download paths:** Compare ordinary file links, HTML download attributes, URLs with query parameters, opening a PDF in a new tab, and an intentional missing file.
 
 The site follows the browser's light or dark appearance. Its sample files are included in this repository; visiting the site does not open their links automatically.
 
 GitHub Pages hosts the website as static files. The optional local server in [MANUAL.md](docs/MANUAL.md) adds tests that require real HTTP response headers, redirects, or delayed responses.
 
-Current version: [26.9.25.2](CHANGELOG.md). Versions use `YY.M.D.NUM`, with the last number counting releases on that date.
+Current version: [26.10.19.1](CHANGELOG.md). Versions use `YY.M.D.NUM`, with the last number counting releases on that date.

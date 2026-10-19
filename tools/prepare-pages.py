@@ -14,7 +14,7 @@ if OUT.is_symlink():
 if OUT.exists():
     shutil.rmtree(OUT)
 (OUT / 'files').mkdir(parents=True)
-for name in ('style.css', 'site.js', 'mark.svg', 'manifest.json', 'CNAME', '.nojekyll'):
+for name in ('style.css', 'site.js', 'link-builder.js', 'mark.svg', 'manifest.json', 'CNAME', '.nojekyll'):
     shutil.copyfile(WEB / name, OUT / name)
 shutil.copyfile(ROOT / 'README.md', OUT / 'README.md')
 shutil.copyfile(DOCS / 'MANUAL.md', OUT / 'MANUAL.md')
