@@ -2,6 +2,12 @@
 
 Versions follow `YY.M.D.NUM`. `NUM` starts at 1 for each date and increases with each release on that date.
 
+## 2026-10-19 — 26.10.19.3
+
+- Move index.html to the repository root so the website opens directly from a local file without a build or hosting service.
+- Remove the custom GitHub Actions deployment workflow and staging script; keep assets and samples organized in web/.
+- Keep server-only response tests in the optional local server rather than the static page.
+
 ## 2026-10-19 — 26.10.19.2
 
 - Group each telephone, email, and SMS input with its corresponding generated link in one card.

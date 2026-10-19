@@ -1,22 +1,20 @@
 # Cosmic WebTest 使用与部署手册
 
-项目简介见仓库根目录的 `README.md`。本手册说明测试内容、本地运行和 GitHub Pages 部署。
+项目简介见仓库根目录的 `README.md`。本手册说明测试内容、本地打开与可选的静态托管。
 
 左侧切换文档样本、链接与协议、链接生成器、下载路径。自动适配深浅色；刷新时保留当前栏目，不异步插入文件列表或加载网页字体。
 
-## 发布到 GitHub Pages
+## 直接打开
 
-Cosmic WebTest 是独立仓库。保留 `.github/workflows/pages.yml`，推送到 `main`。
+双击仓库根目录的 `index.html` 即可打开网站。保留同级 `web/` 和 `docs/` 文件夹；样式、脚本、图标、样本与手册都使用相对路径，不需要安装依赖、构建、联网或 GitHub Pages。
 
-1. 在 GitHub 仓库的 **Settings → Pages → Build and deployment → Source** 中选择 **GitHub Actions**。
-2. 推送到 `main`，或在 Actions 中手动运行 **Deploy Cosmic WebTest**。
-3. 部署完成后，从 Pages 设置或 workflow 的 deployment 链接访问网站。
+网页本身可以在 `file://` 下运行。需要检验扩展在 HTTP/HTTPS 页面的实际拦截行为时，可使用下方的可选本地服务，或将同一份静态文件放到网站服务器上。浏览器对本地文件页面与普通网站的扩展权限不同。
 
-无需修改仓库名、域名或路径配置。站内文件和资源使用相对 URL，兼容 `https://用户名.github.io/仓库名/` 和独立域名；栏目使用 hash，不依赖服务器路由重写。
+## 静态托管（可选）
 
-workflow 运行 `python3 tools/prepare-pages.py`，只发布 `.pages/` 中的网页资源、项目简介、手册、域名配置与文件样本。不会重新生成文档，也不会发布本地服务器、生成脚本、截图、测试资料或 `.DS_Store`。`.build/` 与 `.pages/` 已在本站的 `.gitignore` 中排除。
+直接使用仓库根目录作为网站目录，入口为 `index.html`。不使用自定义 GitHub Actions workflow，也不需要运行预处理脚本。站内资源和文件使用相对 URL，既可部署在独立域名，也可放在网站的子目录；栏目使用 hash，不依赖服务器路由重写。
 
-也可以手动运行 `python3 tools/prepare-pages.py`，将生成的 `.pages/` 内容部署到其他静态服务器。
+`CNAME` 和 `.nojekyll` 仅保留为静态托管配置，不影响本地打开；发布平台的设置由仓库管理者自行处理。`.build/` 与旧 `.pages/` 目录仍由 Git 忽略，本地资料不随提交上传。
 
 ## 可用测试
 
@@ -26,9 +24,7 @@ workflow 运行 `python3 tools/prepare-pages.py`，只发布 `.pages/` 中的网
 - 链接与协议：HTTP/HTTPS、mailto、tel、sms 和虚构应用协议。
 - 文档内部的网页及协议链接：用于测试预览器中的 External Links Capture。
 
-GitHub Pages 是静态托管，不能运行本项目的 Python 服务。真正的自定义 Content-Disposition、无扩展名下载响应、HTTP 302、慢速分块与省略 Content-Length 等用例仅由本地 `tools/server.py` 提供，线上页面不显示这些入口。不使用 JavaScript、假重定向或 Service Worker 冒充真实服务端响应。
-
-官方说明：[GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)、[Actions 部署](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
+直接打开 HTML 或使用普通静态托管时，不运行本项目的 Python 服务。真正的自定义 Content-Disposition、无扩展名下载响应、HTTP 302、慢速分块与省略 Content-Length 等用例仅由本地 `tools/server.py` 提供，线上页面不显示这些入口。不使用 JavaScript、假重定向或 Service Worker 冒充真实服务端响应。
 
 ## 链接生成器
 
@@ -73,18 +69,19 @@ python3 tools/server.py
 
 访问 `http://127.0.0.1:8765/`，使用 Control+C 停止；端口已被占用时运行 `python3 tools/server.py --port 8766`。
 
-本地服务在首次响应中开启“本地服务响应”区域，提供附件响应头、无扩展名下载、302、慢速与未知大小测试。普通静态服务器和 GitHub Pages 不显示该区域。
+本地服务在首次响应中开启“本地服务响应”区域，提供附件响应头、无扩展名下载、302、慢速与未知大小测试。直接打开 HTML 或使用普通静态托管时不显示该区域。
 
-服务器只监听本机回环地址，只开放明确列出的文件，不提供目录浏览。无需安装依赖。不要使用双击 HTML 的方式代替 HTTP/HTTPS 测试。
+服务器只监听本机回环地址，只开放明确列出的文件，不提供目录浏览。无需安装依赖；只有响应头等 HTTP 测试需要启动它，平时可以直接双击根目录的 HTML。
 
 ## 维护
 
-- `web/`：桌面网站、样本文件、域名配置与静态资源。
-- `tools/prepare-pages.py`：只拷贝允许公开的文件，并去除本地响应测试区域。
+- `index.html`：可直接双击打开的网站入口。
+- `web/`：样式、脚本、图标与样本文件。
+- `CNAME` / `.nojekyll`：可选静态托管配置。
 - `tools/server.py` / `tools/start.command`：本地响应测试服务。
 - `docs/MANUAL.md`：本手册。
 - `VERSION` / `CHANGELOG.md`：日历版本号与按日期记录的更新。
-- `.github/workflows/pages.yml`：Pages 部署配置。
+- `tools/server-fixtures.html`：只由可选本地服务注入的响应测试入口，不在普通静态页面中出现。
 - `.build/`：本地保留的生成脚本、独立测试浏览器截图与检查资料，不提交或发布。已有文件可以反复使用；不需要重新生成。
 
-当前开发目录虽存放在 Cosmic Gemini 已忽略的 `dist/` 中，但有独立的 Git 仓库和远端。它不随浏览器扩展打包；网站部署仅使用本仓库中由 `tools/prepare-pages.py` 整理的文件。
+当前开发目录虽存放在 Cosmic Gemini 已忽略的 `dist/` 中，但有独立的 Git 仓库和远端。它不随浏览器扩展打包；网站直接使用根目录入口与文件夹中的资源，不再生成单独的网站发布副本。

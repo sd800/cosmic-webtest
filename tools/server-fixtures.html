@@ -1,0 +1,10 @@
+<section class="server-tests" aria-labelledby="server-tests-title">
+        <h2 id="server-tests-title">本地服务响应</h2>
+        <div class="request-table">
+          <a class="request-row" href="download?id=docx"><strong>无扩展名入口</strong><span>响应头提供文件名</span><span class="format" lang="en">DOCX</span><span class="link-arrow" aria-hidden="true">↗</span></a>
+          <a class="request-row" href="redirect/sample.pptx"><strong>重定向</strong><span>一次 302 跳转</span><span class="format" lang="en">PPTX</span><span class="link-arrow" aria-hidden="true">↗</span></a>
+          <a class="request-row" href="slow/sample.docx"><strong>慢速响应</strong><span>约 4 秒分块返回</span><span class="format" lang="en">DOCX</span><span class="link-arrow" aria-hidden="true">↗</span></a>
+          <a class="request-row" href="unknown-size/sample.xlsx"><strong>无文件大小</strong><span lang="en">无 Content-Length</span><span class="format" lang="en">XLSX</span><span class="link-arrow" aria-hidden="true">↗</span></a>
+          <a class="request-row" href="attachment/sample.pdf"><strong>PDF 附件</strong><span lang="en">attachment 响应头</span><span class="format" lang="en">PDF</span><span class="link-arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </section>

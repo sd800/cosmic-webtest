@@ -7,9 +7,18 @@ import argparse, json, time, re
 
 ROOT = Path(__file__).resolve().parent.parent
 WEB = ROOT / 'web'
-DOCS = ROOT / 'docs'
 MANIFEST = {f['name']: f for f in json.loads((WEB/'manifest.json').read_text())}
-STATIC = {'/link-builder.js':('link-builder.js','text/javascript; charset=utf-8'), '/mark.svg':('mark.svg','image/svg+xml'), '/':('index.html','text/html; charset=utf-8'), '/index.html':('index.html','text/html; charset=utf-8'), '/style.css':('style.css','text/css; charset=utf-8'), '/site.js':('site.js','text/javascript; charset=utf-8'), '/manifest.json':('manifest.json','application/json; charset=utf-8'), '/README.md':('README.md','text/plain; charset=utf-8'), '/MANUAL.md':('MANUAL.md','text/plain; charset=utf-8')}
+STATIC = {
+    '/': ('index.html', 'text/html; charset=utf-8'),
+    '/index.html': ('index.html', 'text/html; charset=utf-8'),
+    '/web/mark.svg': ('web/mark.svg', 'image/svg+xml'),
+    '/web/style.css': ('web/style.css', 'text/css; charset=utf-8'),
+    '/web/site.js': ('web/site.js', 'text/javascript; charset=utf-8'),
+    '/web/link-builder.js': ('web/link-builder.js', 'text/javascript; charset=utf-8'),
+    '/web/manifest.json': ('web/manifest.json', 'application/json; charset=utf-8'),
+    '/README.md': ('README.md', 'text/plain; charset=utf-8'),
+    '/docs/MANUAL.md': ('docs/MANUAL.md', 'text/plain; charset=utf-8'),
+}
 
 class Handler(BaseHTTPRequestHandler):
     server_version = 'CosmicWebTest/1.0'
@@ -27,16 +36,18 @@ class Handler(BaseHTTPRequestHandler):
         mode='files'; name=''; download_name=''
         if path in STATIC:
             filename,mime=STATIC[path]
-            source = ROOT / filename if filename == 'README.md' else DOCS / filename if filename == 'MANUAL.md' else WEB / filename
+            source = ROOT / filename
             data=source.read_bytes()
             if filename == 'index.html':
                 data = data.replace(b'<html lang="zh-CN"', b'<html lang="zh-CN" data-server-fixtures', 1)
+                data = data.replace(b'<!-- local-server-fixtures -->', (ROOT / 'tools/server-fixtures.html').read_bytes())
         else:
             if path == '/download':
                 ext=parse_qs(target.query).get('id',[''])[0];name='sample.'+ext
                 mode='attachment';download_name='文档 预览测试.'+ext
             else:
-                parts=path.strip('/').split('/')
+                fixture_path = path[4:] if path.startswith('/web/files/') else path
+                parts=fixture_path.strip('/').split('/')
                 if len(parts)!=2 or parts[0] not in ('files','attachment','slow','unknown-size','redirect'):
                     self.send_error(404);return
                 mode,name=parts

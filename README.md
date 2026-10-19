@@ -1,8 +1,8 @@
 # Cosmic WebTest
 
-Cosmic WebTest is a small website for testing how browser extensions handle document previews, downloads, and external links in a real HTTPS page.
+Cosmic WebTest is a small website for testing how browser extensions handle document previews, downloads, and external links on local pages or a hosted website.
 
-这是一个用于测试浏览器扩展文档预览、下载及外部链接处理的网站。
+这是一个用于测试浏览器扩展文档预览、下载及外部链接处理的静态网站。
 
 [Open Cosmic WebTest](https://test.songming.org/) · [使用与部署手册](docs/MANUAL.md)
 
@@ -15,6 +15,8 @@ Cosmic WebTest is a small website for testing how browser extensions handle docu
 
 The site follows the browser's light or dark appearance. Its sample files are included in this repository; visiting the site does not open their links automatically.
 
-GitHub Pages hosts the website as static files. The optional local server in [MANUAL.md](docs/MANUAL.md) adds tests that require real HTTP response headers, redirects, or delayed responses.
+Open **[index.html](index.html)** directly in your browser. No installation, build, GitHub Actions, or hosting service is required. The same files can also be hosted on a static web server.
 
-Current version: [26.10.19.2](CHANGELOG.md). Versions use `YY.M.D.NUM`, with the last number counting releases on that date.
+The optional local server in [MANUAL.md](docs/MANUAL.md) adds tests that require real HTTP response headers, redirects, or delayed responses.
+
+Current version: [26.10.19.3](CHANGELOG.md). Versions use `YY.M.D.NUM`, with the last number counting releases on that date.
